@@ -9,7 +9,7 @@ import 'profile_screen.dart';
 
 
 class TripsScreen extends StatefulWidget {
-  const TripsScreen({Key? key}) : super(key: key);
+  const TripsScreen({super.key});
 
   @override
   _TripsScreenState createState() => _TripsScreenState();

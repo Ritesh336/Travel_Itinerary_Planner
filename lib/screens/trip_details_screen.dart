@@ -11,7 +11,7 @@ import 'profile_screen.dart';
 class TripDetailsScreen extends StatelessWidget {
   final String tripId;
  
-  const TripDetailsScreen({Key? key, required this.tripId}) : super(key: key);
+  const TripDetailsScreen({super.key, required this.tripId});
 
   @override
   Widget build(BuildContext context) {

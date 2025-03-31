@@ -25,7 +25,7 @@ void main() async {
 
 
 class TravelItineraryPlanner extends StatelessWidget {
-  const TravelItineraryPlanner({Key? key}) : super(key: key);
+  const TravelItineraryPlanner({super.key});
 
 
   @override

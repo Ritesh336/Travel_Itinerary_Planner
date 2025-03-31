@@ -4,7 +4,7 @@ import 'theme_provider.dart';
 
 
 class ThemeToggle extends StatelessWidget {
-  const ThemeToggle({Key? key}) : super(key: key);
+  const ThemeToggle({super.key});
 
 
   @override

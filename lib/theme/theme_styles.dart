@@ -143,8 +143,8 @@ class AppTheme {
         color: _lightPrimaryColor,
       ),
       checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStateProperty.resolveWith<Color>((states) {
-          if (states.contains(MaterialState.selected)) {
+        fillColor: WidgetStateProperty.resolveWith<Color>((states) {
+          if (states.contains(WidgetState.selected)) {
             return _lightPrimaryColor;
           }
           return Colors.white;
@@ -296,8 +296,8 @@ class AppTheme {
       ),
       dividerColor: Colors.grey[800],
       checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStateProperty.resolveWith<Color>((states) {
-          if (states.contains(MaterialState.selected)) {
+        fillColor: WidgetStateProperty.resolveWith<Color>((states) {
+          if (states.contains(WidgetState.selected)) {
             return _darkPrimaryColor;
           }
           return const Color(0xFF424242);

@@ -10,7 +10,7 @@ import 'profile_screen.dart';
 
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
 
   @override
@@ -448,10 +448,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
   void _showAddTripDialog(BuildContext context) {
-    final _nameController = TextEditingController();
-    DateTime _startDate = DateTime.now();
-    DateTime _endDate = DateTime.now().add(const Duration(days: 7));
-    int _destinations = 1;
+    final nameController = TextEditingController();
+    DateTime startDate = DateTime.now();
+    DateTime endDate = DateTime.now().add(const Duration(days: 7));
+    int destinations = 1;
 
 
     showDialog(
@@ -498,7 +498,7 @@ class _HomeScreenState extends State<HomeScreen> {
                      
                       // Trip name field
                       TextField(
-                        controller: _nameController,
+                        controller: nameController,
                         decoration: const InputDecoration(
                           labelText: 'Trip Name',
                           prefixIcon: Icon(Icons.bookmark),
@@ -528,20 +528,20 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         title: const Text('Start Date'),
-                        subtitle: Text(DateFormat('MMM dd, yyyy').format(_startDate)),
+                        subtitle: Text(DateFormat('MMM dd, yyyy').format(startDate)),
                         trailing: const Icon(Icons.calendar_today),
                         onTap: () async {
                           final date = await showDatePicker(
                             context: context,
-                            initialDate: _startDate,
+                            initialDate: startDate,
                             firstDate: DateTime.now(),
                             lastDate: DateTime.now().add(const Duration(days: 365)),
                           );
                           if (date != null) {
                             setState(() {
-                              _startDate = date;
-                              if (_endDate.isBefore(_startDate)) {
-                                _endDate = _startDate.add(const Duration(days: 1));
+                              startDate = date;
+                              if (endDate.isBefore(startDate)) {
+                                endDate = startDate.add(const Duration(days: 1));
                               }
                             });
                           }
@@ -565,18 +565,18 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         title: const Text('End Date'),
-                        subtitle: Text(DateFormat('MMM dd, yyyy').format(_endDate)),
+                        subtitle: Text(DateFormat('MMM dd, yyyy').format(endDate)),
                         trailing: const Icon(Icons.calendar_today),
                         onTap: () async {
                           final date = await showDatePicker(
                             context: context,
-                            initialDate: _endDate,
-                            firstDate: _startDate,
-                            lastDate: _startDate.add(const Duration(days: 365)),
+                            initialDate: endDate,
+                            firstDate: startDate,
+                            lastDate: startDate.add(const Duration(days: 365)),
                           );
                           if (date != null) {
                             setState(() {
-                              _endDate = date;
+                              endDate = date;
                             });
                           }
                         },
@@ -621,17 +621,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                 children: [
                                   IconButton(
                                     icon: const Icon(Icons.remove),
-                                    onPressed: _destinations > 1 ? () {
+                                    onPressed: destinations > 1 ? () {
                                       setState(() {
-                                        _destinations--;
+                                        destinations--;
                                       });
                                     } : null,
-                                    color: _destinations > 1 ? Colors.red : Colors.grey,
+                                    color: destinations > 1 ? Colors.red : Colors.grey,
                                   ),
                                   Container(
                                     padding: const EdgeInsets.symmetric(horizontal: 8),
                                     child: Text(
-                                      '$_destinations',
+                                      '$destinations',
                                       style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
@@ -640,12 +640,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   IconButton(
                                     icon: const Icon(Icons.add),
-                                    onPressed: _destinations < 10 ? () {
+                                    onPressed: destinations < 10 ? () {
                                       setState(() {
-                                        _destinations++;
+                                        destinations++;
                                       });
                                     } : null,
-                                    color: _destinations < 10 ? Theme.of(context).primaryColor : Colors.grey,
+                                    color: destinations < 10 ? Theme.of(context).primaryColor : Colors.grey,
                                   ),
                                 ],
                               ),
@@ -669,13 +669,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           Expanded(
                             child: ElevatedButton(
                               onPressed: () {
-                                if (_nameController.text.trim().isNotEmpty) {
+                                if (nameController.text.trim().isNotEmpty) {
                                   Provider.of<TripData>(context, listen: false).addTrip(
                                     Trip.create(
-                                      name: _nameController.text.trim(),
-                                      startDate: _startDate,
-                                      endDate: _endDate,
-                                      destinations: _destinations,
+                                      name: nameController.text.trim(),
+                                      startDate: startDate,
+                                      endDate: endDate,
+                                      destinations: destinations,
                                     ),
                                   );
                                   Navigator.pop(context);

@@ -8,7 +8,7 @@ import '../models/trip.dart';
 class ExpenseTrackerScreen extends StatelessWidget {
   final String tripId;
 
-  const ExpenseTrackerScreen({Key? key, required this.tripId}) : super(key: key);
+  const ExpenseTrackerScreen({super.key, required this.tripId});
 
   @override
   Widget build(BuildContext context) {

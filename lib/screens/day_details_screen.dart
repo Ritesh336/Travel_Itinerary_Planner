@@ -13,10 +13,10 @@ class DayDetailsScreen extends StatefulWidget {
   final String dayId;
 
   const DayDetailsScreen({
-    Key? key,
+    super.key,
     required this.tripId,
     required this.dayId,
-  }) : super(key: key);
+  });
 
   @override
   _DayDetailsScreenState createState() => _DayDetailsScreenState();
@@ -182,7 +182,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> with SingleTickerPr
   }
 
   void _showAddTodoDialog(BuildContext context, String tripId) {
-    final _titleController = TextEditingController();
+    final titleController = TextEditingController();
 
 
     showDialog(
@@ -191,7 +191,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> with SingleTickerPr
         return AlertDialog(
           title: const Text('Add To-Do Item'),
           content: TextField(
-            controller: _titleController,
+            controller: titleController,
             decoration: const InputDecoration(
               labelText: 'Title',
             ),
@@ -204,10 +204,10 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> with SingleTickerPr
             ),
             ElevatedButton(
               onPressed: () {
-                if (_titleController.text.trim().isNotEmpty) {
+                if (titleController.text.trim().isNotEmpty) {
                   final todoItem = TodoItem(
                     id: DateTime.now().millisecondsSinceEpoch.toString(),
-                    title: _titleController.text.trim(),
+                    title: titleController.text.trim(),
                   );
                   Provider.of<TripData>(context, listen: false)
                       .addTodoItem(tripId, todoItem);
@@ -223,10 +223,10 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> with SingleTickerPr
   }
 
   void _showAddExpenseDialog(BuildContext context, String tripId, DateTime date) {
-    final _titleController = TextEditingController();
-    final _amountController = TextEditingController();
-    String _category = 'Transportation';
-    final _categories = [
+    final titleController = TextEditingController();
+    final amountController = TextEditingController();
+    String category = 'Transportation';
+    final categories = [
       'Transportation',
       'Accommodation',
       'Food',
@@ -248,14 +248,14 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> with SingleTickerPr
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     TextField(
-                      controller: _titleController,
+                      controller: titleController,
                       decoration: const InputDecoration(
                         labelText: 'Title',
                       ),
                     ),
                     const SizedBox(height: 16),
                     TextField(
-                      controller: _amountController,
+                      controller: amountController,
                       decoration: const InputDecoration(
                         labelText: 'Amount',
                         prefixText: '\$ ',
@@ -264,11 +264,11 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> with SingleTickerPr
                     ),
                     const SizedBox(height: 16),
                     DropdownButtonFormField<String>(
-                      value: _category,
+                      value: category,
                       decoration: const InputDecoration(
                         labelText: 'Category',
                       ),
-                      items: _categories.map((category) {
+                      items: categories.map((category) {
                         return DropdownMenuItem(
                           value: category,
                           child: Text(category),
@@ -276,7 +276,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> with SingleTickerPr
                       }).toList(),
                       onChanged: (value) {
                         setState(() {
-                          _category = value!;
+                          category = value!;
                         });
                       },
                     ),
@@ -290,16 +290,16 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> with SingleTickerPr
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    if (_titleController.text.trim().isNotEmpty &&
-                        _amountController.text.trim().isNotEmpty) {
+                    if (titleController.text.trim().isNotEmpty &&
+                        amountController.text.trim().isNotEmpty) {
                       try {
-                        final amount = double.parse(_amountController.text.trim());
+                        final amount = double.parse(amountController.text.trim());
                         final expense = Expense(
                           id: DateTime.now().millisecondsSinceEpoch.toString(),
-                          title: _titleController.text.trim(),
+                          title: titleController.text.trim(),
                           amount: amount,
                           date: date,
-                          category: _category,
+                          category: category,
                         );
                         Provider.of<TripData>(context, listen: false)
                             .addExpense(tripId, expense);
@@ -331,10 +331,10 @@ class _ActivitiesTab extends StatelessWidget {
   final Day day;
 
   const _ActivitiesTab({
-    Key? key,
+    super.key,
     required this.tripId,
     required this.day,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

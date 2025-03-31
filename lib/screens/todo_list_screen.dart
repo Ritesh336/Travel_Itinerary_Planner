@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/trip_data.dart';
-import '../models/trip.dart';
 
 
 class TodoListScreen extends StatelessWidget {
